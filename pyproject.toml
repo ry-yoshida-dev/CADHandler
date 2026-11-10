@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cad-handler"
+version = "0.0.1"
+authors = [
+  { name = "Ryuto Yoshida" },
+]
+description = "Backend-agnostic solid modeling over PythonSCAD and CadQuery."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "cadquery>=2.8",
+    "numpy>=2.5.4",
+    "pythonscad>=1.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/ry-yoshida-dev/CADHandler"
+"Bug Tracker" = "https://github.com/ry-yoshida-dev/CADHandler/issues"
+
+[tool.uv]
+exclude-newer = "7 days"
+
+[dependency-groups]
+dev = [
+    "basedpyright>=1.40.2",
+    "mypy>=2.4.1",
+    "pytest>=9.2.0",
+    "ruff>=0.17.3",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+cad_handler = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.mypy]
+files = ["src", "tests"]
+mypy_path = "typings"
+strict = true
+
+[tool.basedpyright]
+include = ["src", "tests"]
+typeCheckingMode = "strict"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "ISC001", "ISC002", "D"]
+# Only public classes, methods, and functions need docstrings, and multi-line ones are the local style.
+ignore = ["E501", "D100", "D104", "D105", "D200", "D212"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D"]
+"typings/*" = ["D"]

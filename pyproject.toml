@@ -13,8 +13,11 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "cadquery>=2.8",
+    "cartesian-axis-3d",
+    "ezdxf>=1.4",
     "numpy>=2.5.4",
     "pythonscad>=1.1",
+    "units",
 ]
 
 [project.urls]
@@ -23,6 +26,10 @@ Homepage = "https://github.com/ry-yoshida-dev/CADHandler"
 
 [tool.uv]
 exclude-newer = "7 days"
+
+[tool.uv.sources]
+units = { git = "https://github.com/ry-yoshida-dev/Units.git" }
+cartesian-axis-3d = { git = "https://github.com/ry-yoshida-dev/CartesianAxis3D.git" }
 
 [dependency-groups]
 dev = [

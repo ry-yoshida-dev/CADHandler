@@ -1,10 +1,13 @@
 from pathlib import Path
 
 import pytest
+from cartesian_axis import Axis
 
 from cad_handler import BoundingBox, CADBackend, ExportFormat, Modeler, Solid
 from cad_handler.cadquery import CadQueryModeler
 from cad_handler.pythonscad import PythonSCADModeler
+
+from .conftest import AUTOCAD, MM, offset_mm
 
 
 @pytest.mark.parametrize(
@@ -30,15 +33,16 @@ def test_export_format_rejects_unknown_suffix(file_name: str) -> None:
         ExportFormat.from_path(Path(file_name))
 
 
-def test_bounding_box_size_and_center() -> None:
-    box = BoundingBox(minimum=(-1.0, 0.0, 2.0), maximum=(3.0, 2.0, 2.0))
-    assert box.size == (4.0, 2.0, 0.0)
-    assert box.center == (1.0, 1.0, 2.0)
+def test_bounding_box_extent_and_center() -> None:
+    box = BoundingBox(minimum=offset_mm(-1.0, 0.0, 2.0), maximum=offset_mm(3.0, 2.0, 2.0))
+    assert box.extent(Axis.X) == 4.0 * MM
+    assert box.extent(Axis.Z) == 0.0 * MM
+    assert box.center == offset_mm(1.0, 1.0, 2.0)
 
 
 def test_bounding_box_rejects_inverted_corners() -> None:
     with pytest.raises(ValueError, match="must not exceed"):
-        BoundingBox(minimum=(0.0, 1.0, 0.0), maximum=(1.0, 0.0, 1.0))
+        BoundingBox(minimum=offset_mm(0.0, 1.0, 0.0), maximum=offset_mm(1.0, 0.0, 1.0))
 
 
 @pytest.mark.parametrize(
@@ -48,4 +52,4 @@ def test_bounding_box_rejects_inverted_corners() -> None:
 def test_backend_creates_its_modeler(
     backend: CADBackend, modeler_type: type[Modeler[Solid]]
 ) -> None:
-    assert isinstance(backend.create_modeler(), modeler_type)
+    assert isinstance(backend.create_modeler(AUTOCAD), modeler_type)

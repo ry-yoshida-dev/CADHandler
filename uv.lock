@@ -7,7 +7,7 @@ resolution-markers = [
 ]
 
 [options]
-exclude-newer = "2026-11-03T23:19:19.986692Z"
+exclude-newer = "2026-11-04T23:40:21.048271Z"
 exclude-newer-span = "P7D"
 
 [[package]]
@@ -274,8 +274,11 @@ version = "0.0.1"
 source = { editable = "." }
 dependencies = [
     { name = "cadquery" },
+    { name = "cartesian-axis-3d" },
+    { name = "ezdxf" },
     { name = "numpy" },
     { name = "pythonscad" },
+    { name = "units" },
 ]
 
 [package.dev-dependencies]
@@ -289,8 +292,11 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "cadquery", specifier = ">=2.8" },
+    { name = "cartesian-axis-3d", git = "https://github.com/ry-yoshida-dev/CartesianAxis3D.git" },
+    { name = "ezdxf", specifier = ">=1.4" },
     { name = "numpy", specifier = ">=2.5.4" },
     { name = "pythonscad", specifier = ">=1.1" },
+    { name = "units", git = "https://github.com/ry-yoshida-dev/Units.git" },
 ]
 
 [package.metadata.requires-dev]
@@ -357,6 +363,14 @@ version = "7.9.3.1.1"
 source = { registry = "https://pypi.org/simple" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/30/c0/04e9363a99fee892de2776820e3dcf04f8825b6edc9580efe3416c9465a7/cadquery_ocp_proxy-7.9.3.1.1-py3-none-any.whl", hash = "sha256:ca4164ec4b54956d9fc3e68c67d555b5486cb963c2f71e18df005ba16b921c91", size = 3322, upload-time = "2026-05-28T13:08:49.092Z" },
+]
+
+[[package]]
+name = "cartesian-axis-3d"
+version = "0.0.1"
+source = { git = "https://github.com/ry-yoshida-dev/CartesianAxis3D.git#5a1268aaf146db5040f3e127c92b4431603f5a11" }
+dependencies = [
+    { name = "numpy" },
 ]
 
 [[package]]
@@ -2150,6 +2164,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/7a/29/6a1391d31cd00ff9e927215a224a880e1e84e826b64ba80a499e51c074d8/tzdata-2026.6.tar.gz", hash = "sha256:85d2cd9c09f81f0bb29db27759fc83af4f1e620efb814f8c5bf8b4cc4feece6d", size = 201017, upload-time = "2026-10-28T09:57:09.137Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/0a/66/9a06c2227fedfd4919f0eaaa8b94377d9730882a7e4f95823c9a331ab5e1/tzdata-2026.6-py2.py3-none-any.whl", hash = "sha256:0a10eec6e13ef16b627fabed9a5f2ba61a62b1c67f327305f4e7e412a70b4aec", size = 348210, upload-time = "2026-10-28T09:57:07.276Z" },
+]
+
+[[package]]
+name = "units"
+version = "0.1.0"
+source = { git = "https://github.com/ry-yoshida-dev/Units.git#f3b9a717ab2d7c86d29135a46e4eff89130e2e7b" }
+dependencies = [
+    { name = "numpy" },
+    { name = "typing-extensions" },
 ]
 
 [[package]]
